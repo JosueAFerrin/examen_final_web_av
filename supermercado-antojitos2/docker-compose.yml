@@ -1,0 +1,35 @@
+version: '3'
+services:
+  clientes:
+    build:
+      context: ./path-to-clientes-service
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+
+  ventas:
+    build:
+      context: ./path-to-ventas-service
+    ports:
+      - "3003:3003"
+    depends_on:
+      - mongo
+
+  inventario:
+    build:
+      context: ./path-to-inventario-service
+    ports:
+      - "3002:3002"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
